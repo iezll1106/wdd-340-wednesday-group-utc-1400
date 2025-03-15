@@ -1,1 +1,1 @@
-# wdd-340-Wednesda_Group-UTC-1400
+WDD-340 Group Project by Michael Olayemi Bernard, Fong King Leong and Liezl Gonzaga Lizardo
