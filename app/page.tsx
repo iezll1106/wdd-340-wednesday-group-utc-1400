@@ -1,4 +1,4 @@
-import AcmeLogo from '@/app/ui/acme-logo';
+import { AcmeLogo } from '@/app/ui/acme-logo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { inter, lora } from '@/app/ui/fonts';
@@ -13,7 +13,7 @@ export default function Page() {
       </div>
       <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
         <div className="flex flex-col justify-center gap-3 rounded-lg border border-gray-900 rounded-lg px-6 py-10 md:w-2/5 md:px-10">
-          <p className={`text-xl text-purple-900 md:text-3xl md:leading-normal`}> <strong className={`${lora.className} text-[25px] text-#F5E6CC italic md:text-[35px]`}> "Discover the Art of Handmade Where Creativity Meets Craftsmanship!" </strong></p>
+          <p className={`text-xl text-purple-900 md:text-3xl md:leading-normal`}> <strong className={`${lora.className} text-[25px] text-#F5E6CC italic md:text-[35px]`}> &quot;Discover the Art of Handmade Where Creativity Meets Craftsmanship!&quot; </strong></p>
           <p className='text-purple-900'> <span>🌿 Unique. Authentic. Handcrafted with Love. 🌿</span> </p>
 
 

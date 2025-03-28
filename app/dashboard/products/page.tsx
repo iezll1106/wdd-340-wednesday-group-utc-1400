@@ -1,4 +1,4 @@
-import ProductCard from './productCard';
+import ProductCard from '@/app/ui/products/productCard';
 import { products } from "@/app/lib/placeholder-data";
 
 export default function ProductsPage() {
