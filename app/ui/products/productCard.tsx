@@ -14,7 +14,7 @@ interface ProductProps {
 
 export default function ProductCard({ product }: ProductProps) {
   return (
-    <div className="border rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition max-w-[250px]">
+    <div className="border border-gray-200 rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition max-w-[250px]">
       <Image 
         src={product.image_url} 
         alt={product.name} 

@@ -13,7 +13,7 @@ interface SellerProps {
 
 export default async function ReviewCard({ seller }: SellerProps) {
   return (
-    <div className="border rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition max-w-[250px]">              
+    <div className="border border-gray-200 rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition max-w-[250px]">              
         <h2 className="font-bold">{seller.name}</h2>
         {/* <Image 
             alt={seller.name} src={seller.image_url}
