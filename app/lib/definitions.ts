@@ -12,7 +12,7 @@ export type Seller = {
   id: string;
   name: string;
   email: string;
-  store_name: string;
+  shop_name: string;
   description?: string;
 };
 
