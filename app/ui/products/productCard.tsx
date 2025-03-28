@@ -2,11 +2,11 @@ import Image from "next/image";
 
 interface ProductProps {
   product: {
-    id: number;
+    id: string;
     name: string;
     description: string;
     price: number;
-    imageUrl: string;
+    image_url: string;
   };
 }
 
@@ -14,7 +14,7 @@ export default function ProductCard({ product }: ProductProps) {
   return (
     <div className="border rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition">
       <Image 
-        src={product.imageUrl} 
+        src={product.image_url} 
         alt={product.name} 
         width={300} 
         height={200} 
