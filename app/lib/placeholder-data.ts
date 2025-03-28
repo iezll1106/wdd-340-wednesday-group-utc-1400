@@ -1,22 +1,22 @@
 const users = [
   {
-    id: crypto.randomUUID(),
-    name: 'User',
-    email: 'user@nextmail.com',
+    id: 'a1b2c3d4-e5f6-7890-1234-56789abcdef0',
+    name: 'User1',
+    email: 'liezl@nextmail.com',
     password: '123456',
   },
 ];
 
 const sellers = [
   {
-    id: crypto.randomUUID(),
+    id: 'b2c3d4e5-f678-9012-3456-789abcdef123',
     name: 'Jose Carreon',
     email: 'jose@carreon.com',
     shop_name: 'Jose Crafts',
     description: 'Handmade crafts and decor',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'c3d4e5f6-7890-1234-5678-9abcdef12345',
     name: 'Grace Lim',
     email: 'grace@lim.com',
     shop_name: 'Grace Crafts and Woodworks',
@@ -26,22 +26,22 @@ const sellers = [
 
 const products = [
   {
-    id: crypto.randomUUID(),
+    id: 'd4e5f678-9012-3456-789a-bcdef1234567',
     seller_id: sellers[0].id,
     name: 'Handmade Vase',
     description: 'A beautiful ceramic vase',
     price: 25.99,
-    image_url: 'https://ephraimpottery.com/product/skyflower-vase/#iLightbox[product-gallery]/1',
+    image_url: '/images/handmade-vase.webp',
     stock: 10,
     category: 'Home Decor',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'e5f67890-1234-5678-9abc-def123456789',
     seller_id: sellers[1].id,
     name: 'Wooden Chair',
     description: 'A sturdy oak chair',
     price: 99.99,
-    image_url: 'https://woodenbazar.com/products/wood-grandpa-rocking-chair-baby-rocking-chair-fir-kids-ing-chair#images-1',
+    image_url: '/images/wooden-chair.avif',
     stock: 5,
     category: 'Furniture',
   },
@@ -49,7 +49,7 @@ const products = [
 
 const orders = [
   {
-    id: crypto.randomUUID(),
+    id: 'f6789012-3456-789a-bcde-f123456789ab',
     user_id: users[0].id,
     seller_id: sellers[0].id,
     total_price: 99.99,
@@ -60,7 +60,7 @@ const orders = [
 
 const reviews = [
   {
-    id: crypto.randomUUID(),
+    id: '67890123-4567-89ab-cdef-123456789abc',
     product_id: products[0].id,
     user_id: users[0].id,
     rating: 5,

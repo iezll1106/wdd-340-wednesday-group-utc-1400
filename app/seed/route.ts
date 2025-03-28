@@ -5,10 +5,10 @@ import { users, products, sellers, orders, reviews } from "../lib/placeholder-da
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 async function seedUsers() {
-  await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+  await sql`CREATE EXTENSION IF NOT EXISTS "pgcrypto"`;
   await sql`
     CREATE TABLE IF NOT EXISTS users (
-      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
       email TEXT NOT NULL UNIQUE,
       password TEXT NOT NULL
@@ -32,7 +32,7 @@ async function seedUsers() {
 async function seedSellers() {
   await sql`
     CREATE TABLE IF NOT EXISTS sellers (
-      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
       email TEXT NOT NULL UNIQUE,
       shop_name VARCHAR(255) NOT NULL
@@ -53,7 +53,7 @@ async function seedSellers() {
 async function seedProducts() {
   await sql`
     CREATE TABLE IF NOT EXISTS products (
-      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
       seller_id UUID NOT NULL,
       name VARCHAR(255) NOT NULL,
       description TEXT NOT NULL,
@@ -78,7 +78,7 @@ async function seedProducts() {
 async function seedOrders() {
   await sql`
     CREATE TABLE IF NOT EXISTS orders (
-      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
       user_id UUID NOT NULL,
       seller_id UUID NOT NULL,
       total_price DECIMAL(10,2) NOT NULL,
@@ -103,7 +103,7 @@ async function seedOrders() {
 async function seedReviews() {
   await sql`
     CREATE TABLE IF NOT EXISTS reviews (
-      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
       product_id UUID NOT NULL,
       user_id UUID NOT NULL,
       rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
