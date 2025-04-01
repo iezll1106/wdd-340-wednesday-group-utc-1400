@@ -3,9 +3,9 @@ POST http://localhost:3000/query/sellers
 Content-Type: application/json
 
 {
-    "name": "William Smith",
-    "email": "william@example.com",
-    "shop_name": "Williams Handmade Crafts and Gifts"
+    "name": "Madeline Torres",
+    "email": "madeline@example.com",
+    "shop_name": "Madeline Handmade Gifts Shop"
 }
 
 ### Create a Product (Replace `seller_id` with actual ID)
