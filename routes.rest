@@ -13,12 +13,12 @@ POST http://localhost:3000/query/products
 Content-Type: application/json
 
 {
-    "seller_id": "4b390fe3-29b3-42fe-82c9-f7456d359a03",
-    "name": "Handmade Ceramic Mug",
-    "description": "A beautifully designed ceramic mug",
-    "price": 15.99,
-    "stock": 20,
-    "image_url": "/images/mug.jpg"
+    "seller_id": "267ac3f4-3afb-47b0-962e-f9f16675cd6c",
+    "name": "Handmade Bag",
+    "description": "A beautifully designed handmade bag for all occassion",
+    "price": 65.99,
+    "stock": 1,
+    "image_url": "/images/handmade-bag2.jpeg"
 }
 
 ### Get All Sellers
