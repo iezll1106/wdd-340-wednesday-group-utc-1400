@@ -15,10 +15,21 @@ Content-Type: application/json
 {
     "seller_id": "267ac3f4-3afb-47b0-962e-f9f16675cd6c",
     "name": "Handmade Bag",
-    "description": "A beautifully designed handmade bag for all occassion",
+    "description": "A beautifully designed handmade bag for all occasion",
     "price": 65.99,
     "stock": 1,
     "image_url": "/images/handmade-bag2.jpeg"
+}
+
+### Create a Review (Replace `user_id` and `product_id` with actual ID)
+POST http://localhost:3000/query/reviews
+Content-Type: application/json
+
+{
+    "product_id": "636659c7-b6f3-49c0-aeb3-a49b452b32a5",
+    "user_id": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
+    "rating": 5,
+    "comment": "Love the bag"
 }
 
 ### Get All Sellers
@@ -26,3 +37,6 @@ GET http://localhost:3000/query/sellers
 
 ### Get All Products
 GET http://localhost:3000/query/products
+
+### Get All Reviews
+GET http://localhost:3000/query/reviews
