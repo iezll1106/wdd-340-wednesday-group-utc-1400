@@ -1,3 +1,13 @@
+### Create a User
+POST http://localhost:3000/query/users
+Content-Type: application/json
+
+{
+    "name": "User 2",
+    "email": "john@example.com",
+    "password": "password123"
+}
+
 ### Create a Seller
 POST http://localhost:3000/query/sellers
 Content-Type: application/json
@@ -21,6 +31,17 @@ Content-Type: application/json
     "image_url": "/images/handmade-bag2.jpeg"
 }
 
+### Create an Order (Replace `user_id` and `seller_id` with actual ID)
+POST http://localhost:3000/query/orders
+Content-Type: application/json
+
+{
+    "user_id": "636659c7-b6f3-49c0-aeb3-a49b452b32a5",
+    "seller_id": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
+    "total_price": 85.95,
+    "status": "pending"
+}
+
 ### Create a Review (Replace `user_id` and `product_id` with actual ID)
 POST http://localhost:3000/query/reviews
 Content-Type: application/json
@@ -32,11 +53,17 @@ Content-Type: application/json
     "comment": "Love the bag"
 }
 
+### Get All Users
+GET http://localhost:3000/query/users
+
 ### Get All Sellers
 GET http://localhost:3000/query/sellers
 
 ### Get All Products
 GET http://localhost:3000/query/products
+
+### Get All Orders
+GET http://localhost:3000/query/orders
 
 ### Get All Reviews
 GET http://localhost:3000/query/reviews

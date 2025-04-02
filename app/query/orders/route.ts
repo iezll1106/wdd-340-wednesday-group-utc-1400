@@ -6,8 +6,8 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
 //Get all reviews
 export async function GET() {
     try {
-        const reviews = await sql`SELECT * FROM reviews;`;
-        return NextResponse.json(reviews);
+        const orders = await sql`SELECT * FROM orders;`;
+        return NextResponse.json(orders);
     } catch (error) {
         console.error("Error fetching reviews:", error);
         return NextResponse.json({ error: "Failed to fetch reviews"}, { status:500 });
@@ -17,11 +17,11 @@ export async function GET() {
 //Create a new review
 export async function POST(req: Request) {
     try {
-        const { product_id, user_id, rating, comment, created_at } = await req.json();
+        const {  user_id, seller_id, total_price, status} = await req.json();
 
         const [ reviews ] = await sql`
-            INSERT INTO REVIEWS (product_id, user_id, rating, comment, created_at)
-            VALUES (${product_id}, ${user_id}, ${rating}, ${comment}, ${created_at})
+            INSERT INTO REVIEWS (user_id, seller_id, total_price, status)
+            VALUES (${user_id}, ${seller_id},  ${total_price}, ${status})
             RETURNING *;
             `;
         return NextResponse.json(reviews, { status: 201 });
