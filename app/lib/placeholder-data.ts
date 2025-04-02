@@ -13,12 +13,14 @@ const sellers = [
     name: 'Jose Carreon',
     email: 'jose@carreon.com',
     shop_name: 'Jose Crafts',
+    description: 'Handmade crafts and decor',
   },
   {
     id: 'c3d4e5f6-7890-1234-5678-9abcdef12345',
     name: 'Grace Lim',
     email: 'grace@lim.com',
     shop_name: 'Grace Crafts and Woodworks',
+    description: 'Custom wooden furniture and carvings',
   },
 ];
 
@@ -31,6 +33,7 @@ const products = [
     price: 25.99,
     image_url: '/images/handmade-vase.webp',
     stock: 10,
+    category: 'Home Decor',
   },
   {
     id: 'e5f67890-1234-5678-9abc-def123456789',
@@ -40,6 +43,7 @@ const products = [
     price: 99.99,
     image_url: '/images/wooden-chair.avif',
     stock: 5,
+    category: 'Furniture',
   },
 ];
 

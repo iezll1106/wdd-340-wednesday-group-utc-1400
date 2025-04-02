@@ -17,11 +17,11 @@ export async function GET() {
 // Create a new product
 export async function POST(req: Request) {
   try {
-    const { seller_id, name, description, price, stock, image_url } = await req.json();
+    const { seller_id, name, description, price, stock, category, image_url } = await req.json();
 
     const [product] = await sql`
-      INSERT INTO products (seller_id, name, description, price, stock, image_url)
-      VALUES (${seller_id}, ${name}, ${description}, ${price}, ${stock}, ${image_url})
+      INSERT INTO products (seller_id, name, description, price, stock, category, image_url)
+      VALUES (${seller_id}, ${name}, ${description}, ${price}, ${stock}, ${category}, ${image_url})
       RETURNING *;
     `;
 

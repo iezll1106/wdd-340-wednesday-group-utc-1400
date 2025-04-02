@@ -18,17 +18,17 @@ export async function GET() {
 // Create a new seller
 export async function POST(req: Request) {
   try {
-    const { name, email, shop_name } = await req.json(); // ✅ Correct JSON parsing
+    const { name, email, shop_name, description } = await req.json();
 
     // Validate required fields
-    if (!name || !email || !shop_name) {
+    if (!name || !email || !shop_name || !description) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     // Insert into the database
     const [seller] = await sql`
-      INSERT INTO sellers (name, email, shop_name)
-      VALUES (${name}, ${email}, ${shop_name})
+      INSERT INTO sellers (name, email, shop_name, description)
+      VALUES (${name}, ${email}, ${shop_name}, ${description})
       RETURNING *;
     `;
 
