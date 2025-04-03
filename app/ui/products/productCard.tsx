@@ -9,6 +9,8 @@ interface ProductProps {
     description: string;
     price: number;
     image_url: string;
+    stock: number;
+    category: string;
   };
 }
 
