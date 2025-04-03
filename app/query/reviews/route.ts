@@ -17,11 +17,11 @@ export async function GET() {
 //Create a new review
 export async function POST(req: Request) {
     try {
-        const { product_id, user_id, rating, comment, created_at } = await req.json();
+        const { product_id, user_id, rating, comment} = await req.json();
 
         const [ reviews ] = await sql`
-            INSERT INTO REVIEWS (product_id, user_id, rating, comment, created_at)
-            VALUES (${product_id}, ${user_id}, ${rating}, ${comment}, ${created_at})
+            INSERT INTO REVIEWS (product_id, user_id, rating, comment)
+            VALUES (${product_id}, ${user_id}, ${rating}, ${comment})
             RETURNING *;
             `;
         return NextResponse.json(reviews, { status: 201 });
