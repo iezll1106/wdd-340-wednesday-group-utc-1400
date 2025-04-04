@@ -1,31 +1,72 @@
 import postgres from 'postgres';
 import {
   User,
-  // Seller,
+  Seller,
   // Order,
   Product,
-  // Review,
+  Review,
 } from './definitions';
+import { number } from 'zod';
 // import { formatCurrency } from './utils';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
+// Users
 export async function fetchUsername (id : string) {
   const data = await sql<User[]>`SELECT name FROM users WHERE id=${id} `;
 
   return data[0].name
 };
 
+// Sellers
 export async function fetchSellerName (id : string) {
   const data = await sql<User[]>`SELECT name FROM sellers WHERE id=${id} `;
 
   return data[0].name
 };
 
+export async function fetchSellers () {
+  const data = await sql<Seller[]>`SELECT * FROM sellers`;
+
+  return data
+};
+
+export async function fetchSellerById (id : string) {
+  const data = await sql<Seller[]>`SELECT * FROM sellers WHERE id=${id}`;
+
+  return data[0]
+};
+
+export async function fetchTopSellers (amount: number) {
+  const data = await sql<Seller[]>`SELECT * FROM sellers LIMIT ${amount}`;
+
+  return data
+};
+
+// Products
+export async function fetchProductById (id : string) {
+  const data = await sql<Product[]>`SELECT * FROM products WHERE id=${id} `;
+
+  return data[0]
+};
+
 export async function fetchProductInfo (id : string) {
   const data = await sql<Product[]>`SELECT name, image_url FROM products WHERE id=${id} `;
 
   return data[0]
+};
+
+// Reviews
+export async function fetchReviews () {
+  const data = await sql<Review[]>`SELECT * FROM reviews`;
+
+  return data
+};
+
+export async function fetchReviewsByProductId (id : string) {
+  const data = await sql<Review[]>`SELECT * FROM reviews WHERE product_id=${id} `;
+
+  return data
 };
 
 // export async function fetchRevenue() {

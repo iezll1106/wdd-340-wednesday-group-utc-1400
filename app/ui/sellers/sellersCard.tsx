@@ -1,4 +1,5 @@
 // import Image from "next/Image"
+import Link from "next/Link";
 import {  } from "@/app/lib/data";
 
 interface SellerProps {
@@ -11,9 +12,9 @@ interface SellerProps {
     };
 }
 
-export default async function ReviewCard({ seller }: SellerProps) {
+export default async function SellerCard({ seller }: SellerProps) {
   return (
-    <div className="border border-gray-200 rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition max-w-[250px]">              
+    <Link href={`/dashboard/sellers/${seller.id}`} className="border border-gray-200 rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition max-w-[250px]">              
         <h2 className="font-bold">{seller.name}</h2>
         {/* <Image 
             alt={seller.name} src={seller.image_url}
@@ -24,6 +25,6 @@ export default async function ReviewCard({ seller }: SellerProps) {
         <hr />
         <h3>{seller.email}</h3>  
         <h3>{seller.description}</h3>                     
-    </div>
+    </Link>
   );
 }
