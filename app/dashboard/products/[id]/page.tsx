@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/Link";
+import Link from "next/link";
 import { fetchProductById, fetchSellerName } from "@/app/lib/data";
 import ReviewBoard from "@/app/ui/reviews/reviewBoard";
 

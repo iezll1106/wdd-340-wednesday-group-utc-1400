@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from  "next/Link";
-import { fetchSellerName, fetchSellerById } from "@/app/lib/data";
+import Link from  "next/link";
+import { fetchSellerName } from "@/app/lib/data";
 
 interface ProductProps {
   product: {

@@ -1,5 +1,5 @@
 // import Image from "next/Image"
-import Link from "next/Link";
+import Link from "next/link";
 import {  } from "@/app/lib/data";
 
 interface SellerProps {
