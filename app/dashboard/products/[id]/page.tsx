@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/Link";
 import { fetchProductById, fetchSellerName } from "@/app/lib/data";
+import ReviewBoard from "@/app/ui/reviews/reviewBoard";
 
 export default async function Page (props: { params: Promise<{ id: string }> }) {
     const params = await props.params;
@@ -29,6 +30,7 @@ export default async function Page (props: { params: Promise<{ id: string }> }) 
                     </button>
                 </div>
             </div>
+            <ReviewBoard product_id={product.id}/>
         </div>
     )
 }
