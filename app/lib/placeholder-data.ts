@@ -16,6 +16,20 @@ const users = [
     name: "User 3",
     email: "jane@example.com",
     password: "mypassword"
+  },
+  {
+  id: "3438b428-24a0-4f0c-a6db-503210a4d8ba",
+  name: "Mark Johnson",
+  email: "mark@johnson.com",
+  shop_name: "Mark's Metalworks",
+  description: "Handcrafted metal sculptures and decor"
+  },
+  {
+  id: "9dfa6890-4490-473b-982a-d56867dda692",
+  name: "Sophia Wilson",
+  email: "sophia@wilson.com",
+  shop_name: "Sophia's Knits",
+  description: "Hand-knitted clothing and accessories"
   }
 ];
 
@@ -119,6 +133,16 @@ const products = [
     image_url: "/images/handmade-bag2.jpeg",
     category: "Accessories"
   },
+  {
+    id: "a0476509-d55b-434c-a2a4-29318b660b44",
+    seller_id: "9dfa6890-4490-473b-982a-d56867dda692",
+    name: "Handmade-dreamcatcher",
+    description: "A vibrant abstract painting",
+    price: "15.00",
+    stock: 3,
+    image_url: "/images/handmade-dreamcatcher.webp",
+    category: "Accessories"
+  }
 ];
 
 const orders = [
