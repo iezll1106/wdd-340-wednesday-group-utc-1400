@@ -1,1 +1,1 @@
-WDD-340 Group Project by Michael Olayemi Bernard, Fong King Leong and Liezl Gonzaga Lizardo
+WDD-340 Group Project by Michael Olayemi Bernard, Fong King Leong, Joel Ayvazyan and Liezl Gonzaga Lizardo
