@@ -80,7 +80,7 @@ const sellers = [
     id: "c2d88c8f-dbff-4d8b-a410-25519b1fe7e4",
     name: "William Smith",
     email: "william@example.com",
-    shop_name: "Williams Handmade Crafts and Gifts",
+    shop_name: "William's Handmade Crafts and Gifts",
     description: "a handmade crafts for you"
   },
   {
