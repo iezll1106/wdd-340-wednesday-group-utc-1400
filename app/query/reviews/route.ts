@@ -1,4 +1,3 @@
-import { reviews } from "@/app/lib/placeholder-data";
 import { NextResponse } from "next/server";
 import postgres from "postgres";
 
