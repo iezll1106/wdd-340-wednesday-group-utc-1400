@@ -1,3 +1,4 @@
+import { reviews } from "@/app/lib/placeholder-data";
 import { NextResponse } from "next/server";
 import postgres from "postgres";
 
@@ -25,18 +26,18 @@ export async function POST(req: Request) {
     }
 
     // Insert into the database
-    const [seller] = await sql`
-      INSERT INTO sellers (name, email, shop_name, description)
+    const [reviews] = await sql`
+      INSERT INTO reviews (product_id, user_id, rating, comment)
       VALUES (${product_id}, ${user_id}, ${rating}, ${comment})
       RETURNING *;
     `;
 
-    return NextResponse.json(seller, { status: 201 });
+    return NextResponse.json(reviews, { status: 201 });
 
   } catch (error) {
-    console.error("Error creating seller:", error);
+    console.error("Error creating review:", error);
     return NextResponse.json(
-      { error: error instanceof SyntaxError ? "Invalid JSON format" : "Failed to create seller" }, 
+      { error: error instanceof SyntaxError ? "Invalid JSON format" : "Failed to create review" }, 
       { status: 500 }
     );
   }

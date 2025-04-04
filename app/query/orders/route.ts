@@ -3,18 +3,18 @@ import postgres from "postgres";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
 
-//Get all reviews
+//Get all orders
 export async function GET() {
     try {
         const orders = await sql`SELECT * FROM orders;`;
         return NextResponse.json(orders);
     } catch (error) {
-        console.error("Error fetching reviews:", error);
-        return NextResponse.json({ error: "Failed to fetch reviews"}, { status:500 });
+        console.error("Error fetching orders:", error);
+        return NextResponse.json({ error: "Failed to fetch orders"}, { status:500 });
     }
 }
 
-//Create a new review
+//Create a new order
 export async function POST(req: Request) {
   try {
     const { user_id, seller_id, total_price, status } = await req.json();
@@ -25,18 +25,18 @@ export async function POST(req: Request) {
     }
 
     // Insert into the database
-    const [seller] = await sql`
-      INSERT INTO sellers (name, email, shop_name, description)
+    const [orders] = await sql`
+      INSERT INTO orders (user_id, seller_id, total_price, status)
       VALUES (${user_id}, ${seller_id},  ${total_price}, ${status})
       RETURNING *;
     `;
 
-    return NextResponse.json(seller, { status: 201 });
+    return NextResponse.json(orders, { status: 201 });
 
   } catch (error) {
-    console.error("Error creating seller:", error);
+    console.error("Error creating order:", error);
     return NextResponse.json(
-      { error: error instanceof SyntaxError ? "Invalid JSON format" : "Failed to create seller" }, 
+      { error: error instanceof SyntaxError ? "Invalid JSON format" : "Failed to create order" }, 
       { status: 500 }
     );
   }

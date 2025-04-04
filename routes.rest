@@ -3,9 +3,9 @@ POST http://localhost:3000/query/users
 Content-Type: application/json
 
 {
-    "name": "User 2",
-    "email": "john@example.com",
-    "password": "password123"
+    "name": "User 3",
+    "email": "jane@example.com",
+    "password": "mypassword"
 }
 
 ### Create a Seller
@@ -13,9 +13,10 @@ POST http://localhost:3000/query/sellers
 Content-Type: application/json
 
 {
-    "name": "Madeline Torres",
-    "email": "madeline@example.com",
-    "shop_name": "Madeline Handmade Gifts Shop"
+    "name": "Anna Smith",
+    "email": "anna@smith.com",
+    "shop_name": "Anna's Artistry",
+    "description": "Unique paintings and art pieces"
 }
 
 ### Create a Product (Replace `seller_id` with actual ID)
@@ -23,12 +24,13 @@ POST http://localhost:3000/query/products
 Content-Type: application/json
 
 {
-    "seller_id": "267ac3f4-3afb-47b0-962e-f9f16675cd6c",
-    "name": "Handmade Bag",
-    "description": "A beautifully designed handmade bag for all occasion",
-    "price": 65.99,
-    "stock": 1,
-    "image_url": "/images/handmade-bag2.jpeg"
+    "seller_id": "fc840551-4241-4c04-b98b-aecb428dbcf8",
+    "name": "Abstract Painting",
+    "description": "A vibrant abstract painting",
+    "price": 150.00,
+    "stock": 3,
+    "image_url": "/images/abstract-painting.webp",
+    "category": "Art"
 }
 
 ### Create an Order (Replace `user_id` and `seller_id` with actual ID)
@@ -36,9 +38,9 @@ POST http://localhost:3000/query/orders
 Content-Type: application/json
 
 {
-    "user_id": "636659c7-b6f3-49c0-aeb3-a49b452b32a5",
-    "seller_id": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
-    "total_price": 85.95,
+    "user_id": "3f54dab7-fcf5-4d5b-ac89-a5bcc819be22",
+    "seller_id": "fc840551-4241-4c04-b98b-aecb428dbcf8",
+    "total_price": 150.00,
     "status": "pending"
 }
 
@@ -47,10 +49,10 @@ POST http://localhost:3000/query/reviews
 Content-Type: application/json
 
 {
-    "product_id": "636659c7-b6f3-49c0-aeb3-a49b452b32a5",
-    "user_id": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
+    "product_id": "62751e39-24d1-43f4-bcd7-ae2fe2879be2",
+    "user_id": "3f54dab7-fcf5-4d5b-ac89-a5bcc819be22",
     "rating": 5,
-    "comment": "Love the bag"
+    "comment": "Beautiful artwork, love it"
 }
 
 ### Get All Users

@@ -20,23 +20,23 @@ export async function POST(req: Request) {
     const { seller_id, name, description, price, image_url, stock,  category } = await req.json();
 
     // Validate required fields
-    if (!name || !seller_id || !name || !description || !price || !image_url || !stock || !category) {
+    if (!seller_id || !name || !description || !price || !image_url || !stock || !category) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     // Insert into the database
-    const [seller] = await sql`
-      INSERT INTO sellers (name, email, shop_name, description)
+    const [products] = await sql`
+      INSERT INTO products (seller_id, name, description, price, image_url, stock,  category)
       VALUES (${seller_id}, ${name}, ${description}, ${price}, ${image_url}, ${stock}, ${category})
       RETURNING *;
     `;
 
-    return NextResponse.json(seller, { status: 201 });
+    return NextResponse.json(products, { status: 201 });
 
   } catch (error) {
-    console.error("Error creating seller:", error);
+    console.error("Error creating product:", error);
     return NextResponse.json(
-      { error: error instanceof SyntaxError ? "Invalid JSON format" : "Failed to create seller" }, 
+      { error: error instanceof SyntaxError ? "Invalid JSON format" : "Failed to create product" }, 
       { status: 500 }
     );
   }
