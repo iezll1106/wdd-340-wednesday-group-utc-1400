@@ -16,18 +16,28 @@ export async function GET() {
 
 //Create a new review
 export async function POST(req: Request) {
-    try {
-        const { product_id, user_id, rating, comment} = await req.json();
+  try {
+    const { product_id, user_id, rating, comment } = await req.json();
 
-        const [ reviews ] = await sql`
-            INSERT INTO REVIEWS (product_id, user_id, rating, comment)
-            VALUES (${product_id}, ${user_id}, ${rating}, ${comment})
-            RETURNING *;
-            `;
-        return NextResponse.json(reviews, { status: 201 });
-
-    } catch (error) {
-        console.error("Error adding reviews:", error);
-        return NextResponse.json({ error: "Failed to add review" }, { status: 500} );
+    // Validate required fields
+    if (!product_id || !user_id || !rating || !comment) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
+
+    // Insert into the database
+    const [seller] = await sql`
+      INSERT INTO sellers (name, email, shop_name, description)
+      VALUES (${product_id}, ${user_id}, ${rating}, ${comment})
+      RETURNING *;
+    `;
+
+    return NextResponse.json(seller, { status: 201 });
+
+  } catch (error) {
+    console.error("Error creating seller:", error);
+    return NextResponse.json(
+      { error: error instanceof SyntaxError ? "Invalid JSON format" : "Failed to create seller" }, 
+      { status: 500 }
+    );
+  }
 }
