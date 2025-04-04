@@ -1,0 +1,71 @@
+### Create a User
+POST http://localhost:3000/query/users
+Content-Type: application/json
+
+{
+    "name": "User 3",
+    "email": "jane@example.com",
+    "password": "mypassword"
+}
+
+### Create a Seller
+POST http://localhost:3000/query/sellers
+Content-Type: application/json
+
+{
+    "name": "Anna Smith",
+    "email": "anna@smith.com",
+    "shop_name": "Anna's Artistry",
+    "description": "Unique paintings and art pieces"
+}
+
+### Create a Product (Replace `seller_id` with actual ID)
+POST http://localhost:3000/query/products
+Content-Type: application/json
+
+{
+    "seller_id": "fc840551-4241-4c04-b98b-aecb428dbcf8",
+    "name": "Abstract Painting",
+    "description": "A vibrant abstract painting",
+    "price": 150.00,
+    "stock": 3,
+    "image_url": "/images/abstract-painting.webp",
+    "category": "Art"
+}
+
+### Create an Order (Replace `user_id` and `seller_id` with actual ID)
+POST http://localhost:3000/query/orders
+Content-Type: application/json
+
+{
+    "user_id": "3f54dab7-fcf5-4d5b-ac89-a5bcc819be22",
+    "seller_id": "fc840551-4241-4c04-b98b-aecb428dbcf8",
+    "total_price": 150.00,
+    "status": "pending"
+}
+
+### Create a Review (Replace `user_id` and `product_id` with actual ID)
+POST http://localhost:3000/query/reviews
+Content-Type: application/json
+
+{
+    "product_id": "62751e39-24d1-43f4-bcd7-ae2fe2879be2",
+    "user_id": "3f54dab7-fcf5-4d5b-ac89-a5bcc819be22",
+    "rating": 5,
+    "comment": "Beautiful artwork, love it"
+}
+
+### Get All Users
+GET http://localhost:3000/query/users
+
+### Get All Sellers
+GET http://localhost:3000/query/sellers
+
+### Get All Products
+GET http://localhost:3000/query/products
+
+### Get All Orders
+GET http://localhost:3000/query/orders
+
+### Get All Reviews
+GET http://localhost:3000/query/reviews

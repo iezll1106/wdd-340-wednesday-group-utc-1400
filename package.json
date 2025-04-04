@@ -10,9 +10,11 @@
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.0.0",
     "@tailwindcss/forms": "^0.5.10",
+    "@vercel/postgres": "^0.10.0",
     "autoprefixer": "10.4.21",
     "bcrypt": "^5.1.1",
     "clsx": "^2.1.1",
+    "drizzle-orm": "^0.41.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -25,7 +27,6 @@
     "react-dom": "^19.0.0",
     "tailwindcss": "4.0.17",
     "typedoc": "^0.28.1",
-    "typescript": "5.8.2",
     "use-debounce": "^10.0.4",
     "zod": "^3.24.2"
   },
@@ -35,8 +36,10 @@
     "@types/node": "22.13.14",
     "@types/react": "19.0.12",
     "@types/react-dom": "19.0.4",
+    "drizzle-kit": "^0.30.6",
     "eslint": "^8.52.0",
-    "eslint-config-next": "15.2.4"
+    "eslint-config-next": "15.2.4",
+    "typescript": "5.8.2"
   },
   "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"
 }

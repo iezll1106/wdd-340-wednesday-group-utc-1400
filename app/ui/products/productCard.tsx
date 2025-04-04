@@ -7,8 +7,10 @@ interface ProductProps {
     seller_id: string;
     name: string;
     description: string;
-    price: number;
+    price: number | string;
     image_url: string;
+    stock: number;
+    category: string;
   };
 }
 
