@@ -1,4 +1,4 @@
-import Image from "next/image";
+//import Image from "next/image";
 import { fetchSellerById } from "@/app/lib/data";
 
 export default async function Page (props: { params: Promise<{ id: string }> }) {

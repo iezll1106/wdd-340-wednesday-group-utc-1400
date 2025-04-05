@@ -6,7 +6,7 @@ import {
   Product,
   Review,
 } from './definitions';
-import { number } from 'zod';
+//import { number } from 'zod';
 // import { formatCurrency } from './utils';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });

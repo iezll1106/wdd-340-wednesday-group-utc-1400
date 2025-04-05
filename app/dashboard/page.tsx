@@ -1,8 +1,8 @@
 import { lora } from "@/app/ui/fonts"
 import ProductCard from '@/app/ui/products/productCard';
-import ReviewCard from "../ui/reviews/reviewCard";
-import SellerCard from '@/app/ui/sellers/sellersCard'
-import { products, reviews, sellers } from "@/app/lib/placeholder-data";
+//import ReviewCard from "../ui/reviews/reviewCard";
+//import SellerCard from '@/app/ui/sellers/sellersCard'
+import { products} from "@/app/lib/placeholder-data";
 import ReviewBoard from "../ui/reviews/reviewBoard";
 import TopSellers from "../ui/sellers/topSellers";
 
