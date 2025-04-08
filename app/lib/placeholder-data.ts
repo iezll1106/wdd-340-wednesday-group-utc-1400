@@ -140,14 +140,14 @@ const products = [
     category: "Accessories"
   },
   {
-    id: "a0476509-d55b-434c-a2a4-29318b660b44",
-    seller_id: "9dfa6890-4490-473b-982a-d56867dda692",
-    name: "Handmade-dreamcatcher",
+    id: "62751e39-24d1-43f4-bcd7-ae2fe2879be2",
+    seller_id: "fc840551-4241-4c04-b98b-aecb428dbcf8",
+    name: "Abstract Painting",
     description: "A vibrant abstract painting",
-    price: "15.00",
+    price: "150.00",
     stock: 3,
-    image_url: "/images/handmade-dreamcatcher.jpeg",
-    category: "Accessories"
+    image_url: "/images/abstract-painting.webp",
+    category: "Art"
   },
 ];
 
