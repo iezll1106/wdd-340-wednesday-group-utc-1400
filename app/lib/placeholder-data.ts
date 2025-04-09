@@ -1,5 +1,11 @@
 const users = [
   {
+    id: '3f54dab7-fcf5-4d5b-ac89-a5bcc819be22',
+    name: 'User',
+    email: 'user@nextmail.com',
+    password: '123456',
+  },
+  {
     id: 'a1b2c3d4-e5f6-7890-1234-56789abcdef0',
     name: 'User1',
     email: 'liezl@nextmail.com',
@@ -17,20 +23,6 @@ const users = [
     email: "jane@example.com",
     password: "mypassword"
   },
-  {
-  id: "3438b428-24a0-4f0c-a6db-503210a4d8ba",
-  name: "Mark Johnson",
-  email: "mark@johnson.com",
-  shop_name: "Mark's Metalworks",
-  description: "Handcrafted metal sculptures and decor"
-  },
-  {
-  id: "9dfa6890-4490-473b-982a-d56867dda692",
-  name: "Sophia Wilson",
-  email: "sophia@wilson.com",
-  shop_name: "Sophia's Knits",
-  description: "Hand-knitted clothing and accessories"
-  }
 ];
 
 const sellers = [
@@ -89,7 +81,21 @@ const sellers = [
     email: "anna@smith.com",
     shop_name: "Anna's Artistry",
     description: "Unique paintings and art pieces"
-  }
+  },
+  {
+    id: "3438b428-24a0-4f0c-a6db-503210a4d8ba",
+    name: "Mark Johnson",
+    email: "mark@johnson.com",
+    shop_name: "Mark's Metalworks",
+    description: "Handcrafted metal sculptures and decor"
+  },
+  {
+    id: "9dfa6890-4490-473b-982a-d56867dda692",
+    name: "Sophia Wilson",
+    email: "sophia@wilson.com",
+    shop_name: "Sophia's Knits",
+    description: "Hand-knitted clothing and accessories"
+  },
 ];
 
 const products = [
@@ -134,15 +140,15 @@ const products = [
     category: "Accessories"
   },
   {
-    id: "a0476509-d55b-434c-a2a4-29318b660b44",
-    seller_id: "9dfa6890-4490-473b-982a-d56867dda692",
-    name: "Handmade-dreamcatcher",
+    id: "62751e39-24d1-43f4-bcd7-ae2fe2879be2",
+    seller_id: "fc840551-4241-4c04-b98b-aecb428dbcf8",
+    name: "Abstract Painting",
     description: "A vibrant abstract painting",
-    price: "15.00",
+    price: "150.00",
     stock: 3,
-    image_url: "/images/handmade-dreamcatcher.webp",
-    category: "Accessories"
-  }
+    image_url: "/images/abstract-painting.webp",
+    category: "Art"
+  },
 ];
 
 const orders = [
@@ -161,7 +167,7 @@ const orders = [
     total_price: "150.00",
     status: "pending",
     created_at: "2025-04-03T18:11:30.577Z"
-  }
+  },
 ];
 
 const reviews = [
@@ -188,7 +194,7 @@ const reviews = [
     rating: 5,
     comment: "Beautiful artwork, love it",
     created_at: "2025-04-03T18:19:28.025Z"
-  }
+  },
 ];
 
 export { users, products, sellers, orders, reviews };
