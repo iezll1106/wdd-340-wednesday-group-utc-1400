@@ -146,7 +146,7 @@ const products = [
     description: "A vibrant abstract painting",
     price: "150.00",
     stock: 3,
-    image_url: "/images/abstract-painting.webp",
+    image_url: "/abstract-painting.webp",
     category: "Art"
   },
 ];
