@@ -126,7 +126,7 @@ const products = [
     description: "A beautifully designed ceramic mug",
     price: "15.99",
     stock: 20,
-    image_url: "../mug.jpg",
+    image_url: "/images/mug.jpg",
     category: "Home Decor"
   },
   {
@@ -136,7 +136,7 @@ const products = [
     description: "A beautifully designed handmade bag for all occasion",
     price: "65.99",
     stock: 1,
-    image_url: "./handmade-bag2.jpeg",
+    image_url: "/images/handmade-bag2.jpeg",
     category: "Accessories"
   },
   {
@@ -146,7 +146,7 @@ const products = [
     description: "A vibrant abstract painting",
     price: "150.00",
     stock: 3,
-    image_url: "/abstract-painting.webp",
+    image_url: "/images/abstract-painting.webp",
     category: "Art"
   },
 ];
