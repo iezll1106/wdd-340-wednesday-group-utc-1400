@@ -12,9 +12,10 @@ interface Review {
 
 type Props = {
   product_id?: string;
+  showImages?: boolean;
 };
 
-export default async function ReviewBoard({ product_id }: Props) {
+export default async function ReviewBoard({ product_id, showImages=true }: Props) {
   let reviews: Review[];
 
   if (product_id) {
@@ -26,7 +27,7 @@ export default async function ReviewBoard({ product_id }: Props) {
   return (
     <div className="flex flex-row">
       {reviews.map((review: Review) => (
-        <ReviewCard key={review.id} review={review} />
+        <ReviewCard key={review.id} review={review} showImages={showImages}/>
       ))}
     </div>
   );

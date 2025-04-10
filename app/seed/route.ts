@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import postgres from 'postgres';
 import { users, products, sellers, orders, reviews } from "../lib/placeholder-data";
 

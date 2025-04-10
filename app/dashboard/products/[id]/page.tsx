@@ -30,7 +30,7 @@ export default async function Page (props: { params: Promise<{ id: string }> }) 
                     </button>
                 </div>
             </div>
-            <ReviewBoard product_id={product.id}/>
+            <ReviewBoard product_id={product.id} showImages={false}/>
         </div>
     )
 }
