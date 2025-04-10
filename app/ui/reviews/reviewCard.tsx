@@ -15,10 +15,6 @@ interface ReviewProps {
     showImages?: boolean;
 }
 
-interface showImagesProp {
-    show: boolean;
-}
-
 function StarRating (rating : number) {
     let starRating = ""
     

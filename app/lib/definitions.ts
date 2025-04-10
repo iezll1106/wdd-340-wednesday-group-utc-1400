@@ -8,6 +8,11 @@ export type User = {
   password: string;
 };
 
+export type UserField = {
+  id: string;
+  name: string;
+};
+
 export type Seller = {
   id: string;
   name: string;
@@ -28,6 +33,26 @@ export type Product = {
 };
 
 export type Order = {
+  id: string;
+  user_id: string;
+  seller_id: string;
+  total_price: number;
+  status: 'pending' | 'shipped' | 'delivered' | 'cancelled';
+  created_at: string;
+};
+
+export type FilteredOrder = {
+  id: string;
+  user_id: string;
+  seller_id: string;
+  total_price: number;
+  status: 'pending' | 'shipped' | 'delivered' | 'cancelled';
+  created_at: string;
+  name: string;
+  seller_name: string;
+};
+
+export type OrderForm = {
   id: string;
   user_id: string;
   seller_id: string;
