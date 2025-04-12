@@ -7,6 +7,7 @@ import postgres from 'postgres';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import { Console } from 'console';
+import { Product } from './definitions';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -69,6 +70,36 @@ export type RevState = {
   };
   message?: string | null;
 };
+
+interface ProductProps {
+    id: string;
+    seller_id: string;
+    name: string;
+    description: string;
+    price: number | string;
+    image_url: string;
+    stock: number;
+    category: string;
+}
+
+export async function orderProduct(product : ProductProps, user_id: string) {
+  // this function is for the add to cart button it will just make an order
+  const date = new Date().toISOString().split('T')[0];
+  const status = "pending"
+  const amountInCents = Number(product.price) * 100;
+
+  try {
+    await sql`
+    INSERT INTO orders (user_id, seller_id, total_price, status, created_at)
+      VALUES (${user_id}, ${product.seller_id}, ${amountInCents}, ${status}, ${date})
+    `
+  } catch (error) {
+    console.error('Database Error:', error); // Now logging the error
+    return {
+      message: 'Database Error: Failed to Order Product.',
+    };
+  };
+}
 
 export async function createOrder(prevState: State, formData: FormData) {
   const validatedFields = CreateOrder.safeParse({

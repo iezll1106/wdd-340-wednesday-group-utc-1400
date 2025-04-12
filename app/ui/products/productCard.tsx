@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from  "next/link";
 import { fetchSellerName } from "@/app/lib/data";
+import { orderProduct } from "@/app/lib/actions";
 
 interface ProductProps {
   product: {
@@ -30,8 +31,8 @@ export default function ProductCard({ product }: ProductProps) {
         <p className="text-gray-600">{product.description}</p>
         <div className="flex justify-between items-center mt-3">
           <span className="text-xl font-semibold text-blue-600">${product.price}</span>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-            Add to Cart
+          <button onClick={()=>{orderProduct(product, "3f54dab7-fcf5-4d5b-ac89-a5bcc819be22");}} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+            Add to Cart 
           </button>
         </div>
       </Link>
