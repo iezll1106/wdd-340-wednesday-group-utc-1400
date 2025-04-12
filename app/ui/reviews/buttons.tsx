@@ -2,10 +2,25 @@ import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { deleteReview } from '@/app/lib/actions';
 
-export function CreateReview({ id }: { id: string }) {
+function toggleBollState({ state, setState }: { state: boolean, setState: React.Dispatch<React.SetStateAction<boolean>>}) {
+  if (state) {
+    setState(false)
+  } else {
+    setState(true)
+  }
+}
+
+export function CreateReview({ parentState, setParentState }: { parentState: boolean, setParentState: React.Dispatch<React.SetStateAction<boolean>> }) {
   return (
     //
-    <button type="submit" 
+    <button type="submit"
+    onClick={()=>{
+      if (parentState) {
+        setParentState(false)
+      } else {
+        setParentState(true)
+      }
+    }} 
     className="flex h-10 justify-center items-center mr-auto rounded-lg bg-blue-600 px-2 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
         <span className="">Leave Review</span>
         <PlusIcon className="w-5" />
@@ -13,9 +28,17 @@ export function CreateReview({ id }: { id: string }) {
   );
 }
 
-export function UpdateReview() {
+export function UpdateReview({ parentState, setParentState }: { parentState: boolean, setParentState: React.Dispatch<React.SetStateAction<boolean>> }) {
   return (
-    <button type="submit" className="rounded-md border mx-[0.2rem] p-2 hover:bg-gray-100">
+    <button type="submit" 
+    onClick={()=>{
+      if (parentState) {
+        setParentState(false)
+      } else {
+        setParentState(true)
+      }
+    }} 
+    className="rounded-md border mx-[0.2rem] p-2 hover:bg-gray-100">
         <span className="sr-only">Edit</span>
         <PencilIcon className="w-5" />
     </button>

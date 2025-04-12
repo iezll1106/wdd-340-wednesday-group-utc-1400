@@ -24,23 +24,12 @@ export default function EditReviewForm({
   const [state, formAction] = useActionState(updateReviewWithId, initialState);
 
   // show form
-  const [isShown, setIsShow] = useState(false);
-  function changeShown() {
-    if (isShown) {
-      setIsShow(false)
-    } else {
-      setIsShow(true)
-    }
-  }
-
+  const [isShown, setIsShown] = useState(false);
 
   return (
     <>
       <div className='flex flex-row'>
-        <button type="button" onClick={changeShown} className="rounded-md border mr-[0.2rem] p-2 hover:bg-gray-100">
-          <span className="sr-only">Edit</span>
-          <PencilIcon className="w-5" />
-        </button>
+        <UpdateReview parentState={isShown} setParentState={setIsShown}/>
         <DeleteReview id={review.id}/>
       </div>
 

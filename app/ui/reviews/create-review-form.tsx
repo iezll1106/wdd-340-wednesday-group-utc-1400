@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { Button } from '@/app/ui/button';
 import { createRev, RevState } from '@/app/lib/actions';
 import { useActionState, useState } from 'react';
+import { CreateReview } from "./buttons";
 
 export default function CreateReviewForm({
   id,
@@ -23,24 +24,12 @@ export default function CreateReviewForm({
   const [state, formAction] = useActionState(createRev, initialState);
 
   // show form
-  const [isShown, setIsShow] = useState(false);
-  function changeShown() {
-    if (isShown) {
-      setIsShow(false)
-    } else {
-      setIsShow(true)
-    }
-  }
-
+  const [isShown, setIsShown] = useState(false);
+  
   return (
     <>
       <div>
-        <button type="button" 
-        onClick={changeShown} 
-        className="flex h-10 justify-center items-center mr-auto rounded-lg bg-blue-600 px-2 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
-          <span className="">Leave Review</span>
-          <PlusIcon className="w-5" />
-        </button>
+        <CreateReview parentState={isShown} setParentState={setIsShown}/>
       </div>
 
       {isShown && <form action={formAction}>
