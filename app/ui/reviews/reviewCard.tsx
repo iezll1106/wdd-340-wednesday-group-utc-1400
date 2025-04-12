@@ -1,8 +1,6 @@
 import Image from "next/image"
 import {formatDateToLocal} from "@/app//lib/utils";
 import { fetchUsername, fetchProductInfo } from "@/app/lib/data";
-import { FaceSmileIcon, PencilIcon } from "@heroicons/react/20/solid";
-import { UpdateReview, DeleteReview } from "./buttons";
 import EditReviewForm from "./edit-review-form";
 import { fetchUsers } from "@/app/lib/data";
 

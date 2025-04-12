@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import { UpdateOrder, DeleteOrder } from '@/app/ui/orders/buttons';
 import OrderStatus from '@/app/ui/orders/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';

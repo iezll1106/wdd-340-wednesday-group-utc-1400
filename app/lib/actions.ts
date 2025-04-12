@@ -6,8 +6,6 @@ import { redirect } from 'next/navigation';
 import postgres from 'postgres';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
-import { Console } from 'console';
-import { Product } from './definitions';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -225,7 +223,7 @@ export async function updateReview(
       message: 'Missing Fields. Failed to Update Review.',
     };
   }
-  const { userId, productId, rating, comment } = validatedFields.data;
+  const { productId, rating, comment } = validatedFields.data;
  
   await sql`
     UPDATE reviews

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from  "next/link";
 import { fetchSellerName } from "@/app/lib/data";
-import { orderProduct } from "@/app/lib/actions";
+// import { orderProduct } from "@/app/lib/actions";
 
 interface ProductProps {
   product: {

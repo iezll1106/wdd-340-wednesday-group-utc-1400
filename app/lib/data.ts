@@ -8,8 +8,6 @@ import {
   Review,
   FilteredOrder,
 } from './definitions';
-import OrdersTable from '@/app/ui/orders/table'
-import { Console } from 'console';
 //import { number } from 'zod';
 // import { formatCurrency } from './utils';
 

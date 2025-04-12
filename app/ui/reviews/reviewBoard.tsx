@@ -20,7 +20,6 @@ type Props = {
 
 export default async function ReviewBoard({ product_id, showImages=true, direction="row" }: Props) {
   let reviews: Review[];
-  let content;
   const users = await fetchUsers();
 
   if (product_id) {

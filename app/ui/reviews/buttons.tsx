@@ -1,18 +1,16 @@
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
 import { deleteReview } from '@/app/lib/actions';
 
-function toggleBollState({ state, setState }: { state: boolean, setState: React.Dispatch<React.SetStateAction<boolean>>}) {
-  if (state) {
-    setState(false)
-  } else {
-    setState(true)
-  }
-}
+// function toggleBoolState({ state, setState }: { state: boolean, setState: React.Dispatch<React.SetStateAction<boolean>>}) {
+//   if (state) {
+//     setState(false)
+//   } else {
+//     setState(true)
+//   }
+// }
 
 export function CreateReview({ parentState, setParentState }: { parentState: boolean, setParentState: React.Dispatch<React.SetStateAction<boolean>> }) {
   return (
-    //
     <button type="submit"
     onClick={()=>{
       if (parentState) {
