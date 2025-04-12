@@ -1,7 +1,10 @@
 import Image from "next/image"
 import {formatDateToLocal} from "@/app//lib/utils";
 import { fetchUsername, fetchProductInfo } from "@/app/lib/data";
-import { FaceSmileIcon } from "@heroicons/react/20/solid";
+import { FaceSmileIcon, PencilIcon } from "@heroicons/react/20/solid";
+import { UpdateReview, DeleteReview } from "./buttons";
+import EditReviewForm from "./edit-review-form";
+import { fetchUsers } from "@/app/lib/data";
 
 interface ReviewProps {
     review: {
@@ -27,6 +30,7 @@ function StarRating (rating : number) {
 
 export default async function ReviewCard({ review, showImages=true }: ReviewProps) {
     const product = await fetchProductInfo(review.product_id) 
+    const users = await fetchUsers();
 
     if (showImages) {
         return (
@@ -42,16 +46,19 @@ export default async function ReviewCard({ review, showImages=true }: ReviewProp
                 <h2 className="font-bold">{fetchUsername(review.user_id)}</h2>
                 <h3>{StarRating(review.rating)}</h3>
                 <h3>{review.comment}</h3>
-                <h4 className="text-red-400">{formatDateToLocal(review.created_at)}</h4>                       
+                <h4 className="text-red-400">{formatDateToLocal(review.created_at)}</h4>                      
             </div>
           );
     } else {
         return (
-            <div className="border border-gray-200 rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition max-w-[250px]">
-                <h2 className="font-bold">{fetchUsername(review.user_id)}</h2>
-                <h3>{StarRating(review.rating)}</h3>
-                <h3>{review.comment}</h3>
-                <h4 className="text-red-400">{formatDateToLocal(review.created_at)}</h4>                       
+            <div className="border border-gray-200 rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition">
+                <div>
+                    <h2 className="font-bold">{fetchUsername(review.user_id)}</h2>
+                    <h3>{StarRating(review.rating)}</h3>
+                    <h3>{review.comment}</h3>
+                    <h4 className="text-red-400">{formatDateToLocal(review.created_at)}</h4>
+                </div>
+                <EditReviewForm review={review} users={users}/>           
             </div>
           );
     }

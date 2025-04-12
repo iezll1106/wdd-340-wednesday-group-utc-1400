@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import postgres from 'postgres';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import { Console } from 'console';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -26,8 +27,28 @@ const FormSchema = z.object({
   created_at: z.string(),
 });
 
+const RevFormSchema = z.object({
+  id: z.string(),
+  userId: z.string({
+    invalid_type_error: 'Please select a customer.',
+  }),
+  productId: z.string({
+    invalid_type_error: 'Please select a product.',
+  }),
+  rating: z.coerce
+    .number()
+    .gt(0, { message: 'Please select a rating greater than 0.' }),
+  comment: z.string({
+    invalid_type_error: 'Please write the review.',
+  }),
+  created_at: z.string(),
+});
+
 const CreateOrder = FormSchema.omit({ id: true, created_at: true });
 const UpdateOrder = FormSchema.omit({ id: true, created_at: true });
+
+const CreateReview = RevFormSchema.omit({ id: true, created_at: true });
+const UpdateReview = RevFormSchema.omit({ id: true, created_at: true });
 
 export type State = {
   errors?: {
@@ -35,6 +56,16 @@ export type State = {
     sellerId?: string[];
     total_price?: string[];
     status?: string[];
+  };
+  message?: string | null;
+};
+
+export type RevState = {
+  errors?: {
+    userId?: string[];
+    productId?: string[];
+    rating?: string[];
+    comment?: string[];
   };
   message?: string | null;
 };
@@ -108,6 +139,76 @@ export async function updateOrder(
 export async function deleteOrder(id: string) {
   await sql`DELETE FROM orders WHERE id = ${id}`;
   revalidatePath('/dashboard/orders');
+}
+
+// reviews
+export async function createRev(prevState: RevState, formData: FormData) {
+  const validatedFields = CreateReview.safeParse({
+    userId: formData.get('userId'),
+    productId: formData.get('productId'),
+    rating: formData.get('rating'),
+    comment: formData.get('comment'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Create Review.',
+    };
+  }
+
+  const { userId, productId, rating, comment } = validatedFields.data;
+  const date = new Date().toISOString().split('T')[0];
+
+  try {
+    await sql`
+      INSERT INTO reviews (user_id, product_id, rating, comment, created_at)
+      VALUES (${userId}, ${productId}, ${rating}, ${comment}, ${date})
+    `;
+  } catch (error) {
+    console.error('Database Error:', error); // Now logging the error
+    return {
+      message: 'Database Error: Failed to Create Review.',
+    };
+  }
+
+  revalidatePath('/dashboard/products/'+productId);
+  redirect('/dashboard/products/'+productId);
+}
+
+export async function updateReview(
+  id: string, 
+  prevState: RevState, 
+  formData: FormData
+) {
+  const validatedFields = UpdateReview.safeParse({
+    userId: formData.get('userId'),
+    productId: formData.get('productId'),
+    rating: formData.get('rating'),
+    comment: formData.get('comment'),
+  });
+ 
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Review.',
+    };
+  }
+  const { userId, productId, rating, comment } = validatedFields.data;
+ 
+  await sql`
+    UPDATE reviews
+    SET product_id = ${productId}, rating=${rating}, comment=${comment}
+    WHERE id = ${id}
+  `;
+ 
+  revalidatePath('/dashboard/products/'+productId);
+  redirect('/dashboard/products/'+productId);
+}
+
+export async function deleteReview(id: string) {
+  await sql`DELETE FROM reviews WHERE id = ${id}`;
+  revalidatePath('/dashboard/products/'+id);
 }
 
 export async function authenticate(

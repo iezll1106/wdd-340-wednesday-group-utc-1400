@@ -1,5 +1,7 @@
 import { fetchReviews, fetchReviewsByProductId } from "@/app/lib/data";
 import ReviewCard from "./reviewCard";
+import CreateReviewForm from "./create-review-form";
+import { fetchUsers } from "@/app/lib/data";
 
 interface Review {
   id: string;
@@ -13,22 +15,38 @@ interface Review {
 type Props = {
   product_id?: string;
   showImages?: boolean;
+  direction?: "row" | "col";
 };
 
-export default async function ReviewBoard({ product_id, showImages=true }: Props) {
+export default async function ReviewBoard({ product_id, showImages=true, direction="row" }: Props) {
   let reviews: Review[];
+  let content;
+  const users = await fetchUsers();
 
   if (product_id) {
     reviews = await fetchReviewsByProductId(product_id);
+    content = 
+    <>
+      <CreateReviewForm id={product_id} users={users}/>
+      <div className={`flex flex-${direction} mt-2`}>
+        {reviews.map((review: Review) => (
+          <ReviewCard key={review.id} review={review} showImages={showImages}/>
+        ))}
+      </div>
+    </>
   } else {
     reviews = await fetchReviews();
+    content = 
+    <>
+      <div className={`flex flex-${direction}`}>
+        {reviews.map((review: Review) => (
+          <ReviewCard key={review.id} review={review} showImages={showImages}/>
+        ))}
+      </div>
+    </>
   }
 
   return (
-    <div className="flex flex-row">
-      {reviews.map((review: Review) => (
-        <ReviewCard key={review.id} review={review} showImages={showImages}/>
-      ))}
-    </div>
+    content
   );
 }
