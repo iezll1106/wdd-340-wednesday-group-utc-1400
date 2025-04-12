@@ -25,7 +25,7 @@ export default async function ReviewBoard({ product_id, showImages=true, directi
 
   if (product_id) {
     reviews = await fetchReviewsByProductId(product_id);
-    content = 
+    return (
     <>
       <CreateReviewForm id={product_id} users={users}/>
       <div className={`flex flex-${direction} mt-2`}>
@@ -33,20 +33,16 @@ export default async function ReviewBoard({ product_id, showImages=true, directi
           <ReviewCard key={review.id} review={review} showImages={showImages}/>
         ))}
       </div>
-    </>
+    </>)
   } else {
     reviews = await fetchReviews();
-    content = 
+    return (
     <>
       <div className={`flex flex-${direction}`}>
         {reviews.map((review: Review) => (
           <ReviewCard key={review.id} review={review} showImages={showImages}/>
         ))}
       </div>
-    </>
+    </>)
   }
-
-  return (
-    content
-  );
 }
