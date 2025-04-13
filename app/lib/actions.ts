@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import postgres from 'postgres';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import bcrypt from 'bcrypt';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -258,4 +259,31 @@ export async function authenticate(
     }
     throw error;
   }
+}
+
+export async function createUser(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  const name = formData.get('name')?.toString();
+  const email = formData.get('email')?.toString();
+  const password = formData.get('password')?.toString();
+
+  if (!name || !email || !password) return 'All fields are required.';
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  try {
+    await sql`
+      INSERT INTO users (name, email, password)
+      VALUES (${name}, ${email}, ${hashedPassword})
+    `;
+  } catch (error) {
+    console.error('Error creating user:', error);
+    return 'Failed to create user. Email may already be in use.';
+  }
+
+  await signIn('credentials', formData);
+
+  redirect('/dashboard');
 }
