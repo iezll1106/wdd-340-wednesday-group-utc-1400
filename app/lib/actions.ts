@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import postgres from 'postgres';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import bcrypt from 'bcrypt';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -43,8 +44,33 @@ const RevFormSchema = z.object({
   created_at: z.string(),
 });
 
+const ProductFormSchema = z.object({
+  id: z.string(),
+  sellerId: z.string({
+    invalid_type_error: 'Please select a seller.',
+  }),
+  name: z.string({
+    invalid_type_error: 'Please write a name.',
+  }),
+  description: z.string({
+    invalid_type_error: 'Please write a description.',
+  }),
+  price: z.coerce
+    .number()
+    .gt(0, { message: 'Please enter an amount greater than $0.' }),
+  image_url: z.string(),
+  stock: z.coerce
+    .number(),
+  category: z.string({
+    invalid_type_error: 'Please write a catigory.',
+  }),
+});
+
 const CreateOrder = FormSchema.omit({ id: true, created_at: true });
 const UpdateOrder = FormSchema.omit({ id: true, created_at: true });
+
+const CreateProduct = ProductFormSchema.omit({ id:true})
+const UpdateProduct = ProductFormSchema.omit({ id:true})
 
 const CreateReview = RevFormSchema.omit({ id: true, created_at: true });
 const UpdateReview = RevFormSchema.omit({ id: true, created_at: true });
@@ -69,6 +95,19 @@ export type RevState = {
   message?: string | null;
 };
 
+export type ProdState = {
+  errors?: {
+    sellerId?: string[];
+    name?: string[];
+    description?: string[];
+    price?: string[];
+    image_url?: string[];
+    stock?: string[];
+    category?: string[];
+  };
+  message?: string | null;
+};
+
 interface ProductProps {
     id: string;
     seller_id: string;
@@ -78,25 +117,6 @@ interface ProductProps {
     image_url: string;
     stock: number;
     category: string;
-}
-
-export async function orderProduct(product : ProductProps, user_id: string) {
-  // this function is for the add to cart button it will just make an order
-  const date = new Date().toISOString().split('T')[0];
-  const status = "pending"
-  const amountInCents = Number(product.price) * 100;
-
-  try {
-    await sql`
-    INSERT INTO orders (user_id, seller_id, total_price, status, created_at)
-      VALUES (${user_id}, ${product.seller_id}, ${amountInCents}, ${status}, ${date})
-    `
-  } catch (error) {
-    console.error('Database Error:', error); // Now logging the error
-    return {
-      message: 'Database Error: Failed to Order Product.',
-    };
-  };
 }
 
 export async function createOrder(prevState: State, formData: FormData) {
@@ -171,7 +191,7 @@ export async function deleteOrder(id: string) {
 }
 
 // reviews
-export async function createRev(prevState: RevState, formData: FormData) {
+export async function createReview(prevState: RevState, formData: FormData) {
   const validatedFields = CreateReview.safeParse({
     userId: formData.get('userId'),
     productId: formData.get('productId'),
@@ -240,6 +260,99 @@ export async function deleteReview(id: string) {
   revalidatePath('/dashboard/products/'+id);
 }
 
+// product
+export async function createProduct(prevState: ProdState, formData: FormData) {
+  const validatedFields = CreateProduct.safeParse({
+    sellerId: formData.get('sellerId'),
+    name: formData.get('name'),
+    description: formData.get('description'),
+    price: formData.get('price'),
+    image_url: formData.get('image_url'),
+    stock: formData.get('stock'),
+    category: formData.get('category'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Create Product.',
+    };
+  }
+
+  const { sellerId, name, description, price, image_url, stock, category } = validatedFields.data;
+  // const amountInCents = price * 100;
+
+  try {
+    await sql`
+      INSERT INTO products (seller_id, name, description, price, image_url, stock, category)
+      VALUES (${sellerId}, ${name}, ${description}, ${price}, ${image_url}, ${stock}, ${category})
+    `;
+  } catch (error) {
+    console.error('Database Error:', error); // Now logging the error
+    return {
+      message: 'Database Error: Failed to Create Product.',
+    };
+  }
+
+  revalidatePath('/dashboard/products');
+  redirect('/dashboard/products');
+}
+
+export async function updateProduct(
+  id: string, 
+  prevState: ProdState, 
+  formData: FormData) 
+  {
+  const validatedFields = UpdateProduct.safeParse({
+    sellerId: formData.get('sellerId'),
+    name: formData.get('name'),
+    description: formData.get('description'),
+    price: formData.get('price'),
+    image_url: formData.get('image_url'),
+    stock: formData.get('stock'),
+    category: formData.get('category'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Create Product.',
+    };
+  }
+
+  const { sellerId, name, description, price, image_url, stock, category } = validatedFields.data;
+  // const amountInCents = price * 100;
+
+  try {
+    await sql`
+      UPDATE products
+      SET 
+        seller_id = ${sellerId}, 
+        name = ${name}, 
+        description = ${description}, 
+        price = ${price}, 
+        image_url = ${image_url}, 
+        stock = ${stock}, 
+        category = ${category}
+      WHERE id = ${id}
+    `;
+  } catch (error) {
+    console.error('Database Error:', error); // Now logging the error
+    return {
+      message: 'Database Error: Failed to Create Product.',
+    };
+  }
+
+  revalidatePath('/dashboard/products/'+id);
+  redirect('/dashboard/products/'+id);
+}
+
+export async function deleteProduct(id: string) {
+  await sql`DELETE FROM products WHERE id = ${id}`;
+  revalidatePath('/dashboard/products');
+}
+
+// auth
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
@@ -258,4 +371,31 @@ export async function authenticate(
     }
     throw error;
   }
+}
+
+export async function createUser(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  const name = formData.get('name')?.toString();
+  const email = formData.get('email')?.toString();
+  const password = formData.get('password')?.toString();
+
+  if (!name || !email || !password) return 'All fields are required.';
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  try {
+    await sql`
+      INSERT INTO users (name, email, password)
+      VALUES (${name}, ${email}, ${hashedPassword})
+    `;
+  } catch (error) {
+    console.error('Error creating user:', error);
+    return 'Failed to create user. Email may already be in use.';
+  }
+
+  await signIn('credentials', formData);
+
+  redirect('/dashboard');
 }
