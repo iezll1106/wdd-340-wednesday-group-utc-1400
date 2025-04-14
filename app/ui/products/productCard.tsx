@@ -24,7 +24,7 @@ export default function ProductCard({ product }: ProductProps) {
           alt={product.name} 
           width={300} 
           height={200} 
-          className="rounded-md object-cover"
+          className="rounded-md object-cover w-[300px] h-[200px]"
         />
         <div className="mt-auto">
           <hr className="mt-2"/>

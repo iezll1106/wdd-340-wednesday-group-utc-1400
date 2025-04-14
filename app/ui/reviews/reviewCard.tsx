@@ -37,7 +37,7 @@ export default async function ReviewCard({ review, showImages=true }: ReviewProp
                     alt={product.name} src={product.image_url}
                     width={300} 
                     height={200} 
-                    className="rounded-md"
+                    className="rounded-md object-cover w-[300px] h-[200px]"
                 />
                 <h3>{product.name}</h3>
                 <hr />
