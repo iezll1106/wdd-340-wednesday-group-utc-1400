@@ -1,8 +1,14 @@
 import Link from 'next/link';
 import ProductCard from '@/app/ui/products/productCard';
-import { fetchProducts } from '@/app/lib/data';
+import { fetchFilteredProducts, fetchProducts } from '@/app/lib/data';
 
-export default async function ProductsPage() {
+export default async function ProductsPage(props: {
+  searchParams?: Promise<{
+    query?: string;
+  }>;
+}) {
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query || '';
   const products = await fetchProducts();
 
   return (

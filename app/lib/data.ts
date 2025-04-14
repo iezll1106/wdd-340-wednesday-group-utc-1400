@@ -95,6 +95,36 @@ export async function fetchProducts(): Promise<Product[]> {
   return rows;
 };
 
+export async function fetchFilteredProducts(
+  query: string,
+) {
+  // hcnage thid to match for product
+  try {
+    const orders = await sql<FilteredOrder[]>`
+      SELECT
+        (orders.*),
+        (users.name),
+        (sellers.name) seller_name
+      FROM orders
+      JOIN users ON orders.user_id = users.id
+      JOIN sellers ON orders.seller_id = sellers.id
+      WHERE
+        users.name ILIKE ${`%${query}%`} OR
+        users.email ILIKE ${`%${query}%`} OR
+        sellers.name ILIKE ${`%${query}%`} OR
+        orders.total_price::text ILIKE ${`%${query}%`} OR
+        orders.created_at::text ILIKE ${`%${query}%`} OR
+        orders.status ILIKE ${`%${query}%`}
+      ORDER BY orders.created_at DESC
+    `;    
+
+    return orders;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch orders.');
+  }
+}
+
 // Reviews
 export async function fetchReviews () {
   const data = await sql<Review[]>`SELECT * FROM reviews`;
