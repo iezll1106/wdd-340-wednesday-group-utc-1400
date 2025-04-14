@@ -12,6 +12,9 @@ export default async function Page (props: { params: Promise<{ id: string }> }) 
 
     return (
         <div className="flex flex-col border border-gray-200 rounded-lg shadow-lg p-4 bg-white transition max-w-[1000px] ">
+            <Link href={`/dashboard/products/${id}/edit`} className="bg-green-600 text-white px-4 py-2 rounded ml-auto w-[fit-content] hover:bg-green-700">
+                Edit Product
+            </Link>
             <div className="flex flex-col md:flex-row">
                 <Image 
                     src={product.image_url} 
@@ -26,9 +29,12 @@ export default async function Page (props: { params: Promise<{ id: string }> }) 
                     <p className="text-gray-600">{product.description}</p>
                     <div className="flex flex-col justify-between items-center mt-3 md:flex-row">
                         <span className="text-xl font-semibold text-blue-600">${product.price}</span>
-                        <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                        {/* <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                             Add to Cart
-                        </button>
+                        </button> */}
+                        <Link className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" href={`/dashboard/orders/${product.id}/purchase`}>
+                            Order Product
+                        </Link>
                     </div>
                 </div>
             </div>

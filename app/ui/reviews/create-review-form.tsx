@@ -7,7 +7,7 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
-import { createRev, RevState } from '@/app/lib/actions';
+import { createReview, RevState } from '@/app/lib/actions';
 import { useActionState, useState } from 'react';
 import { CreateReview } from "./buttons";
 
@@ -20,7 +20,7 @@ export default function CreateReviewForm({
 }) {
   // Review
   const initialState: RevState = { message: null, errors: {} };
-  const [state, formAction] = useActionState(createRev, initialState);
+  const [state, formAction] = useActionState(createReview, initialState);
 
   // show form
   const [isShown, setIsShown] = useState(false);
@@ -112,10 +112,10 @@ export default function CreateReviewForm({
             </div>
           </div>
 
-          {/* Rating */}
+          {/* Review */}
           <div className="mb-4">
               <label htmlFor="comment" className="mb-2 block text-sm font-medium">
-              Choose a Rating
+              Write the Review
               </label>
               <div className="relative mt-2 rounded-md">
               <div className="relative">
