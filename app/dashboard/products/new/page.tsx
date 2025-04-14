@@ -1,10 +1,13 @@
+// dashboard/products/new/page.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { fetchSellersBase } from '@/app/lib/data';
 
 export default function NewProductPage() {
   const router = useRouter();
+  const [sellers, setSellers] = useState([]);
   const [form, setForm] = useState({
     name: '',
     description: '',
@@ -12,17 +15,26 @@ export default function NewProductPage() {
     image_url: '',
     stock: '',
     category: '',
-    seller_id: '', // Get this from context or session
+    seller_id: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  useEffect(() => {
+    const getSellersBase = async () => {
+      const data = await fetchSellersBase();
+      setSellers(data);
+    };
+
+    getSellersBase();
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch('/api/products', {
+    const res = await fetch('/query/products', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -33,7 +45,7 @@ export default function NewProductPage() {
     });
 
     if (res.ok) {
-      router.push('/dashboard/products'); 
+      router.push('/dashboard/products');
     } else {
       console.error('Failed to create product');
     }
@@ -49,7 +61,13 @@ export default function NewProductPage() {
         <input name="image_url" placeholder="Image URL" value={form.image_url} onChange={handleChange} className="w-full p-2 border" required />
         <input name="stock" type="number" placeholder="Stock" value={form.stock} onChange={handleChange} className="w-full p-2 border" required />
         <input name="category" placeholder="Category" value={form.category} onChange={handleChange} className="w-full p-2 border" required />
-        <input name="seller_id" placeholder="Seller ID" value={form.seller_id} onChange={handleChange} className="w-full p-2 border" required />
+        
+        <select name="seller_id" value={form.seller_id} onChange={handleChange} className="w-full p-2 border" required>
+          <option value="">Select Seller</option>
+          {sellers.map((seller: any) => (
+            <option key={seller.id} value={seller.id}>{seller.name}</option>
+          ))}
+        </select>
 
         <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
           Create Product
