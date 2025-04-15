@@ -7,6 +7,7 @@ import {
   Product,
   Review,
   FilteredOrder,
+  FilteredProduct,
 } from './definitions';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
@@ -95,27 +96,37 @@ export async function fetchProducts(): Promise<Product[]> {
   return rows;
 };
 
+export async function fetchProductsBySellerId(id: string): Promise<Product[]> {
+  const rows = await sql<Product[]>`SELECT * FROM products WHERE seller_id=${id} ORDER BY id DESC;`;
+  return rows;
+};
+
 export async function fetchFilteredProducts(
   query: string,
+  min: number,
+  max: number,
 ) {
-  // hcnage thid to match for product
   try {
-    const orders = await sql<FilteredOrder[]>`
+    const orders = await sql<FilteredProduct[]>`
       SELECT
-        (orders.*),
-        (users.name),
-        (sellers.name) seller_name
-      FROM orders
-      JOIN users ON orders.user_id = users.id
-      JOIN sellers ON orders.seller_id = sellers.id
+        (products.*),
+        (sellers.name) seller_name,
+        (sellers.shop_name)
+      FROM products
+      JOIN sellers ON products.seller_id = sellers.id
       WHERE
-        users.name ILIKE ${`%${query}%`} OR
-        users.email ILIKE ${`%${query}%`} OR
-        sellers.name ILIKE ${`%${query}%`} OR
-        orders.total_price::text ILIKE ${`%${query}%`} OR
-        orders.created_at::text ILIKE ${`%${query}%`} OR
-        orders.status ILIKE ${`%${query}%`}
-      ORDER BY orders.created_at DESC
+        (
+          products.name ILIKE ${`%${query}%`} OR
+          products.category ILIKE ${`%${query}%`} OR
+          sellers.name ILIKE ${`%${query}%`} OR
+          sellers.shop_name ILIKE ${`%${query}%`}
+        ) 
+        AND
+        (
+          products.price > ${min} AND
+          products.price < ${max}
+        )
+      ORDER BY products.price DESC
     `;    
 
     return orders;

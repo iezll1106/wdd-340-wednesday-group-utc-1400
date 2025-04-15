@@ -32,6 +32,19 @@ export type Product = {
   category: string;
 };
 
+export type FilteredProduct = {
+  id: string;
+  seller_id: string;
+  name: string;
+  description: string;
+  price: number;
+  image_url: string;
+  stock: number;
+  category: string;
+  seller_name: string;
+  shop_name: string;
+};
+
 export type Order = {
   id: string;
   user_id: string;

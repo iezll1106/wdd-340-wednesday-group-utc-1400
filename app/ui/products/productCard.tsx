@@ -30,6 +30,7 @@ export default function ProductCard({ product }: ProductProps) {
           <hr className="mt-2"/>
           <h3 className="text-lg font-bold mt-2">{product.name}</h3>
           <p>by {fetchSellerName(product.seller_id)}</p>
+          <p className="text-gray-800">Category: <span className="bg-green-600 py-1 px-2 w-[fit-content] rounded-md text-white">{product.category}</span></p>
           <p className="text-gray-600">{product.description}</p>
           <div className="flex justify-between items-center mt-3">
             <span className="text-xl font-semibold text-blue-600">${product.price}</span>

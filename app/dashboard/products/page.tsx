@@ -1,15 +1,20 @@
-import Link from 'next/link';
 import ProductCard from '@/app/ui/products/productCard';
-import { fetchFilteredProducts, fetchProducts } from '@/app/lib/data';
+import { fetchFilteredProducts } from '@/app/lib/data';
+import Filters from '@/app/ui/filters';
+import Link from 'next/link';
 
 export default async function ProductsPage(props: {
   searchParams?: Promise<{
     query?: string;
+    min?: number;
+    max?: number;
   }>;
 }) {
   const searchParams = await props.searchParams;
   const query = searchParams?.query || '';
-  const products = await fetchProducts();
+  const min = searchParams?.min || 0;
+  const max = searchParams?.max || 999999999999999;
+  const products = await fetchFilteredProducts(query, min, max);
 
   return (
     <div className="p-8">
@@ -19,10 +24,12 @@ export default async function ProductsPage(props: {
             + Add Product
         </Link>
       </div>
+      <Filters />
       <div className="grid grid-cols-2 sm:grid-cols-2 md:flex flex-wrap gap-6">
-        {products.map((product) => (
+        {products.count > 0 && products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
+        {products.count == 0 && <p className='m-3 text-[30px] text-gray-700'>Nothing to see here...</p>}
       </div>
     </div>
   );

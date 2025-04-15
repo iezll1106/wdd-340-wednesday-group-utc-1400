@@ -74,7 +74,7 @@ export default function EditOrderForm({
               id="seller"
               name="sellerId"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue={order.user_id}
+              defaultValue={order.seller_id}
               aria-describedby="seller-error"
             >
               <option value="" disabled>
