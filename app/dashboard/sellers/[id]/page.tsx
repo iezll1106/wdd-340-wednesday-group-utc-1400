@@ -2,6 +2,7 @@
 import { fetchSellerById, fetchProductsBySellerId } from "@/app/lib/data";
 import ProductCard from "@/app/ui/products/productCard";
 import Link from "next/link"
+import ProductsBoard from "@/app/ui/products/productsBoard";
 
 export default async function Page (props: { params: Promise<{ id: string }> }) {
     const params = await props.params;
@@ -26,12 +27,8 @@ export default async function Page (props: { params: Promise<{ id: string }> }) 
             <Link href="/dashboard/products/new" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
                 + Add Product
             </Link>
-            <div className="flex flex-row bg-gray-200 p-3 rounded-md mt-3 overflow-x-auto gap-3">
-                {products.length > 0 && products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                ))}
-                {products.length == 0 && <p className='m-3 text-[30px] text-gray-700'>Nothing to see here...</p>}
-            </div>     
+            <h1 className="text-2xl font-bold mb-6">Products</h1>
+            <ProductsBoard products={products} scroll={true} deletable={true}/>
         </div>
     )
 }

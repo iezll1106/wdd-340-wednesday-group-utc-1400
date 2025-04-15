@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from  "next/link";
 import { fetchSellerName } from "@/app/lib/data";
-import Route from "next/"
+import { DeleteProduct } from "./buttons";
 
 interface ProductProps {
   product: {
@@ -14,11 +14,16 @@ interface ProductProps {
     stock: number;
     category: string;
   };
+  deletable?: boolean
 }
 
-export default function ProductCard({ product }: ProductProps) {
+export default function ProductCard({ product, deletable }: ProductProps, ) {
   return (
-      <Link className="flex flex-col justify-between border border-gray-200 rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition max-w-[250px]" href={`/dashboard/products/${product.id}`}>
+    <div className="flex flex-col bg-gray-600 rounded-lg p-1">
+      {deletable && 
+        <DeleteProduct id={product.id} sellers_id={product.seller_id}/>
+      }
+      <Link className="flex flex-col justify-between border border-gray-200 rounded-lg shadow-lg p-4 bg-white min-w-[250px] max-w-[250px] hover:shadow-xl transition" href={`/dashboard/products/${product.id}`}>
         <Image 
           src={product.image_url} 
           alt={product.name} 
@@ -40,5 +45,6 @@ export default function ProductCard({ product }: ProductProps) {
           </div>
         </div>
       </Link>
+    </div>
   );
 }

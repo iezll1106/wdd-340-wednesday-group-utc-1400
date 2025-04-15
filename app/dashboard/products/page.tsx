@@ -2,6 +2,7 @@ import ProductCard from '@/app/ui/products/productCard';
 import { fetchFilteredProducts } from '@/app/lib/data';
 import Filters from '@/app/ui/filters';
 import Link from 'next/link';
+import ProductsBoard from '@/app/ui/products/productsBoard';
 
 export default async function ProductsPage(props: {
   searchParams?: Promise<{
@@ -25,12 +26,7 @@ export default async function ProductsPage(props: {
         </Link>
       </div>
       <Filters />
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:flex flex-wrap gap-6">
-        {products.count > 0 && products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-        {products.count == 0 && <p className='m-3 text-[30px] text-gray-700'>Nothing to see here...</p>}
-      </div>
+      <ProductsBoard products={products}/>
     </div>
   );
 }

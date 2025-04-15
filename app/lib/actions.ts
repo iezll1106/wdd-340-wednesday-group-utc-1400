@@ -347,9 +347,9 @@ export async function updateProduct(
   redirect('/dashboard/products/'+id);
 }
 
-export async function deleteProduct(id: string) {
+export async function deleteProduct(id: string, seller_id: string) {
   await sql`DELETE FROM products WHERE id = ${id}`;
-  revalidatePath('/dashboard/products');
+  revalidatePath('/dashboard/sellers/'+seller_id);
 }
 
 // auth
