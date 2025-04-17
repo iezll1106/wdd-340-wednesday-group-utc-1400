@@ -2,6 +2,11 @@
 
 import CreateProductForm from '@/app/ui/products/create-product-form';
 import { fetchSellersBase } from '@/app/lib/data';
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'Add Product | HCH Dashboard',
+};
 
 export default async function NewProductPage() {
   const sellers = await fetchSellersBase()

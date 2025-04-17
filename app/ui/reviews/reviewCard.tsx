@@ -32,7 +32,7 @@ export default async function ReviewCard({ review, showImages=true }: ReviewProp
 
     if (showImages) {
         return (
-            <div className="border border-gray-200 rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition max-w-[250px]">
+            <div className="border border-gray-200 rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition min-w-[200px] max-w-[250px]">
                 <Image 
                     alt={product.name} src={product.image_url}
                     width={300} 

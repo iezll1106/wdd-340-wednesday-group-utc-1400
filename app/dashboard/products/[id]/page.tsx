@@ -2,6 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { fetchProductById, fetchSellerName } from "@/app/lib/data";
 import ReviewBoard from "@/app/ui/reviews/reviewBoard";
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'Product | HCH Dashboard',
+};
 
 export default async function Page (props: { params: Promise<{ id: string }> }) {
     const params = await props.params;

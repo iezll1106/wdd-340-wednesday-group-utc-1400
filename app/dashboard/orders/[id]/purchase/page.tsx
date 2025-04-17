@@ -4,7 +4,7 @@ import { fetchProductById, fetchSellersBase, fetchUsers } from '@/app/lib/data';
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: 'Edit Orders',
+    title: 'Purchase',
 };
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {

@@ -1,5 +1,11 @@
 import EditProductForm from '@/app/ui/products/edit-product-form';
 import { fetchProductById, fetchSellersBase } from '@/app/lib/data';
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'Edit Products | HCH Dashboard',
+};
+
 
 export default async function EditProductPage(props: { params: Promise<{ id: string }> }) {
 const params = await props.params;

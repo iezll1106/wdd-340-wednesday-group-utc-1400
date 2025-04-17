@@ -3,6 +3,11 @@ import { fetchSellerById, fetchProductsBySellerId } from "@/app/lib/data";
 import ProductCard from "@/app/ui/products/productCard";
 import Link from "next/link"
 import ProductsBoard from "@/app/ui/products/productsBoard";
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'Seller | HCH Dashboard',
+};
 
 export default async function Page (props: { params: Promise<{ id: string }> }) {
     const params = await props.params;
@@ -14,7 +19,7 @@ export default async function Page (props: { params: Promise<{ id: string }> }) 
 
     return (
         <div className="border border-gray-200 rounded-lg shadow-lg p-4 bg-white transition max-w-[1000px]">              
-            <h2 className="font-bold">{seller.name}</h2>
+            <h2 className="font-bold text-[50px]">{seller.name}</h2>
             {/* <Image 
                 alt={seller.name} src={seller.image_url}
                 width={300} 

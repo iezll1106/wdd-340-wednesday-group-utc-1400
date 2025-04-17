@@ -4,7 +4,11 @@ import ProductsBoard from "../ui/products/productsBoard";
 import ReviewBoard from "../ui/reviews/reviewBoard";
 import TopSellers from "../ui/sellers/topSellers";
 import { fetchProducts } from "../lib/data";
-
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'HCH Dashboard',
+};
 export default async function Page () {
     const products = await fetchProducts()
 

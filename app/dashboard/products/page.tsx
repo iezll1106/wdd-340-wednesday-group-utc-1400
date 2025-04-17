@@ -3,6 +3,11 @@ import { fetchFilteredProducts } from '@/app/lib/data';
 import Filters from '@/app/ui/filters';
 import Link from 'next/link';
 import ProductsBoard from '@/app/ui/products/productsBoard';
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'All Products | HCH Dashboard',
+};
 
 export default async function ProductsPage(props: {
   searchParams?: Promise<{

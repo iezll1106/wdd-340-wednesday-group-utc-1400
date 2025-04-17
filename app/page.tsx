@@ -1,15 +1,19 @@
-import { AcmeLogo } from '@/app/ui/acme-logo';
+import { HCHLogo } from '@/app/ui/hch-logo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { inter, lora } from '@/app/ui/fonts';
 import Image from 'next/image';
-
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'HCH',
+};
 
 export default function Page() {
   return <>
     <main className={`${inter.className} flex min-h-screen flex-col p-2`}>
       <div className="flex h-30 shrink-0 items-end rounded-lg bg-blue-900 p-4 md:h-30 sm:p-1 md:p-2">
-        <AcmeLogo />
+        <HCHLogo />
       </div>
       <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
         <div className="flex flex-col justify-center gap-3 rounded-lg border border-gray-900 rounded-lg px-6 py-10 md:w-2/5 md:px-10">

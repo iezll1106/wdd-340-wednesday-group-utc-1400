@@ -14,8 +14,8 @@ interface SellerProps {
 
 export default async function SellerCard({ seller }: SellerProps) {
   return (
-    <Link href={`/dashboard/sellers/${seller.id}`} className="border border-gray-200 rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition max-w-[250px]">              
-        <h2 className="font-bold">{seller.name}</h2>
+    <Link href={`/dashboard/sellers/${seller.id}`} className="border border-gray-200 rounded-lg shadow-lg p-4 bg-white hover:shadow-xl transition min-w-[200px] max-w-[250px]">              
+        <h2 className="font-bold text-[30px]">{seller.name}</h2>
         {/* <Image 
             alt={seller.name} src={seller.image_url}
             width={300} 

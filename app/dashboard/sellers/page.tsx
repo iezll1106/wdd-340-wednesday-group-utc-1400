@@ -1,5 +1,10 @@
 import SellerCard from '@/app/ui/sellers/sellersCard';
 import { sellers } from "@/app/lib/placeholder-data";
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'All Sellers | HCH Dashboard',
+};
 
 export default function SellersPage() {
   return (
