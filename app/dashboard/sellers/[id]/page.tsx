@@ -6,7 +6,7 @@ import ProductsBoard from "@/app/ui/products/productsBoard";
 import { Metadata } from 'next';
  
 export const metadata: Metadata = {
-  title: 'Seller | HCH Dashboard',
+  title: 'Seller',
 };
 
 export default async function Page (props: { params: Promise<{ id: string }> }) {

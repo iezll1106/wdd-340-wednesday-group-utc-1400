@@ -3,7 +3,7 @@ import { fetchProductById, fetchSellersBase } from '@/app/lib/data';
 import { Metadata } from 'next';
  
 export const metadata: Metadata = {
-  title: 'Edit Products | HCH Dashboard',
+  title: 'Edit Products',
 };
 
 

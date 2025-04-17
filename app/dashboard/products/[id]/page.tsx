@@ -5,7 +5,7 @@ import ReviewBoard from "@/app/ui/reviews/reviewBoard";
 import { Metadata } from 'next';
  
 export const metadata: Metadata = {
-  title: 'Product | HCH Dashboard',
+  title: 'Product',
 };
 
 export default async function Page (props: { params: Promise<{ id: string }> }) {

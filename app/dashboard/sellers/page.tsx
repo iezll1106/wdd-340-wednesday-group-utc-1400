@@ -3,7 +3,7 @@ import { sellers } from "@/app/lib/placeholder-data";
 import { Metadata } from 'next';
  
 export const metadata: Metadata = {
-  title: 'All Sellers | HCH Dashboard',
+  title: 'All Sellers',
 };
 
 export default function SellersPage() {

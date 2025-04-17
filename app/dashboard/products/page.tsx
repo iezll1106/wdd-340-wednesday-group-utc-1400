@@ -6,7 +6,7 @@ import ProductsBoard from '@/app/ui/products/productsBoard';
 import { Metadata } from 'next';
  
 export const metadata: Metadata = {
-  title: 'All Products | HCH Dashboard',
+  title: 'All Products',
 };
 
 export default async function ProductsPage(props: {

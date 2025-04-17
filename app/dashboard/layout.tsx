@@ -3,8 +3,8 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Acme Dashboard',
-    default: 'Acme Dashboard',
+    template: '%s | HCH Dashboard',
+    default: 'HCH Dashboard',
   },
   description: 'WDD 340 Group 1 Project',
   metadataBase: new URL('https://wdd-340-wednesday-group-utc-1400.vercel.app/'),

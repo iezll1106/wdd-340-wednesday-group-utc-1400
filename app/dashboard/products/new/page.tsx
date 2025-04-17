@@ -5,7 +5,7 @@ import { fetchSellersBase } from '@/app/lib/data';
 import { Metadata } from 'next';
  
 export const metadata: Metadata = {
-  title: 'Add Product | HCH Dashboard',
+  title: 'Add Product',
 };
 
 export default async function NewProductPage() {

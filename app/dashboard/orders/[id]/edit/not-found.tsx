@@ -3,7 +3,7 @@ import { FaceFrownIcon } from '@heroicons/react/24/outline';
 import { Metadata } from 'next';
  
 export const metadata: Metadata = {
-  title: 'Not Found | HCH Dashboard',
+  title: 'Not Found',
 };
 
 export default function NotFound() {

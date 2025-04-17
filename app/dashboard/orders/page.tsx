@@ -9,7 +9,7 @@ import { fetchOrdersPages } from '@/app/lib/data';
 import { Metadata } from 'next';
  
 export const metadata: Metadata = {
-  title: 'Orders | HCH Dashboard',
+  title: 'Orders',
 };
 
 export default async function Page(props: {
