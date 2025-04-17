@@ -123,8 +123,8 @@ export async function fetchFilteredProducts(
         ) 
         AND
         (
-          products.price > ${min} AND
-          products.price < ${max}
+          products.price >= ${min} AND
+          products.price <= ${max}
         )
       ORDER BY products.price DESC
     `;    
