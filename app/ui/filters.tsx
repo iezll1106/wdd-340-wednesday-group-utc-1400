@@ -25,7 +25,7 @@ export default function Filters() {
     <div className="relative flex flex-col">
         <div className='mb-2'>
             <h2 className='mb-2 font-bold text-gray-700'>Search Products</h2>
-            <Search placeholder='... by product name, price, category, seller name & shop name...'/>
+            <Search placeholder='... by product name, category, seller name & shop name...'/>
         </div>
         <div className='my-3 flex flex-col'>
             <h2 className='mb-2 font-bold text-gray-700'>Filters</h2>
