@@ -1,4 +1,14 @@
 import SideNav from '../ui/dashboard/sidenav'
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Acme Dashboard',
+    default: 'Acme Dashboard',
+  },
+  description: 'WDD 340 Group 1 Project',
+  metadataBase: new URL('https://wdd-340-wednesday-group-utc-1400.vercel.app/'),
+};
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
